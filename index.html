@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FoodAI Chatbot</title>
+  
+    <!-- Font Awesome CDN link -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+  
+    <!-- Your other meta tags and stylesheets -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+    <script src="app.js"></script>
+  </head>
+  
+<body ng-app="foodAIApp" ng-controller="ChatBotController">
+  <div class="container">
+    
+    <!-- Header Section -->
+    <header class="header">
+      <div class="logo">
+        <h1 class="project-title"> Food.AI </h1>
+      </div>
+    </header>
+
+    <!-- Chat Window Section -->
+    <div class="chat-container">
+      <div class="messages" ng-repeat="message in messages track by $index">
+        <div ng-class="{'user-message': message.role === 'user', 'ai-message': message.role === 'assistant'}">
+          <p>{{ message.content }}</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- User Input Section -->
+    <div class="input-container">
+      <input type="text" ng-model="userInput" placeholder="Ask a food-related question..." ng-keypress="checkEnterKey($event)" autofocus />
+      <button ng-click="sendMessage()" ng-disabled="loading">
+        <i class="fa-solid fa-arrow-up"></i>
+      </button>
+    </div>
+
+    <!-- Loading Spinner -->
+    <div class="loader" ng-show="loading">
+      <i class="fa fa-spinner fa-spin"></i> Loading...
+    </div>
+  </div>
+</body>
+</html>
